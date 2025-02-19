@@ -1,17 +1,24 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { 
+  HomeIcon, 
+  CodeBracketIcon,
+  FolderIcon,
+  ArchiveBoxIcon,
+  DocumentTextIcon 
+} from '@heroicons/react/24/outline';
 
 export function Navbar() {
   const pathname = usePathname();
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
 
   const links = [
-    { href: '/', label: '首頁' },
-    { href: '/solutions', label: '題解' },
-    { href: '/portfolio', label: '作品集' },
-    { href: '/archive', label: '歸檔' },
-    { href: '/blog', label: '文章' },
+    { href: '/', label: '首頁', icon: HomeIcon },
+    { href: '/solutions', label: '題解', icon: CodeBracketIcon },
+    { href: '/portfolio', label: '作品集', icon: FolderIcon },
+    { href: '/archive', label: '歸檔', icon: ArchiveBoxIcon },
+    { href: '/blog', label: '文章', icon: DocumentTextIcon },
   ];
 
   return (
@@ -26,12 +33,13 @@ export function Navbar() {
               <Link
                 key={link.href}
                 href={`${basePath}${link.href}`}
-                className={`text-sm ${
+                className={`text-sm flex items-center gap-2 px-3 py-2 rounded-lg transition-colors ${
                   pathname === `${basePath}${link.href}`
-                    ? 'text-white'
-                    : 'text-white/60 hover:text-white'
-                } transition-colors`}
+                    ? 'text-white bg-white/10'
+                    : 'text-white/60 hover:text-white hover:bg-white/5'
+                }`}
               >
+                <link.icon className="w-4 h-4" />
                 {link.label}
               </Link>
             ))}
