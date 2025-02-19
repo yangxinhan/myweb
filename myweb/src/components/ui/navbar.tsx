@@ -2,41 +2,42 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-export const Navbar = () => {
+export function Navbar() {
   const pathname = usePathname();
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
 
+  const links = [
+    { href: '/', label: '首頁' },
+    { href: '/solutions', label: '題解' },
+    { href: '/portfolio', label: '作品集' },
+    { href: '/archive', label: '歸檔' },
+    { href: '/blog', label: '文章' },
+  ];
+
   return (
-    <nav className="fixed top-0 w-full z-50 bg-black/20 backdrop-blur-sm">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center">
-            <Link href="/" className="text-white font-bold text-2xl">
-              羊羊的程式日記
-            </Link>
-          </div>
-          <div className="flex items-center gap-8">
-            <Link 
-              href={`${basePath}/`}
-              className={`text-white/70 hover:text-white transition-colors ${pathname === '/' ? 'text-white' : ''}`}
-            >
-              首頁
-            </Link>
-            <Link
-              href={`${basePath}/solutions/`}
-              className={`text-white/70 hover:text-white transition-colors ${pathname === '/solutions' ? 'text-white' : ''}`}
-            >
-              題解
-            </Link>
-            <a href="#projects" className="text-white/70 hover:text-white transition-colors">
-              作品集
-            </a>
-            <a href="#contact" className="text-white/70 hover:text-white transition-colors">
-              聯絡我
-            </a>
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-sm">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <Link href={`${basePath}/`} className="text-white font-bold">
+            羊羊的程式日記
+          </Link>
+          <div className="flex gap-4">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={`${basePath}${link.href}`}
+                className={`text-sm ${
+                  pathname === `${basePath}${link.href}`
+                    ? 'text-white'
+                    : 'text-white/60 hover:text-white'
+                } transition-colors`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
     </nav>
   );
-};
+}

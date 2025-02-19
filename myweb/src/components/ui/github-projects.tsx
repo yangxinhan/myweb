@@ -9,7 +9,11 @@ interface GitHubRepo {
   language: string;
 }
 
-export const GitHubProjects = () => {
+interface GitHubProjectsProps {
+  onProjectSelect?: (project: { owner: string; repo: string }) => void;
+}
+
+export const GitHubProjects = ({ onProjectSelect }: GitHubProjectsProps) => {
   const [repos, setRepos] = useState<GitHubRepo[]>([]);
 
   useEffect(() => {
@@ -31,14 +35,15 @@ export const GitHubProjects = () => {
   }, []);
 
   return (
-    <div className="grid grid-cols-2 gap-3">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {repos.map((repo) => (
-        <a
+        <div
           key={repo.name}
-          href={repo.html_url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="bg-white/5 p-3 rounded-lg hover:bg-white/10 transition-colors"
+          className="bg-white/5 backdrop-blur-sm rounded-xl p-4 hover:bg-white/10 transition-colors cursor-pointer"
+          onClick={() => onProjectSelect?.({
+            owner: 'yangxinhan',
+            repo: repo.name
+          })}
         >
           <h4 className="text-white font-medium truncate">{repo.name}</h4>
           <p className="text-xs text-neutral-300 mt-1 line-clamp-2">
@@ -51,7 +56,7 @@ export const GitHubProjects = () => {
               </span>
             )}
           </div>
-        </a>
+        </div>
       ))}
     </div>
   );
