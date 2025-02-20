@@ -224,5 +224,38 @@ export const solutions: Solution[] = [
         solution: "",
         language: "cpp",
       },
+      {
+        id: 7,
+        title: "AtCoder abc051_b Sum of Three Integers",
+        difficulty: "Easy",
+        platform: "AtCoder",
+        link: "https://atcoder.jp/contests/abc051/tasks/abc051_b",
+        date: "2024-11-03",
+        problem: `You are given two integers K and S.
+                Three variable X, Y and Z takes integer values satisfying 0 ≤ X, Y, Z ≤ K.
+                How many different assignments of values to X, Y and Z are there such that X + Y + Z = S?`,
+        code: `#include <iostream>
+using namespace std;
+
+int main() {
+    int k, s, count = 0;
+    cin >> k >> s;
+
+    for (int x = 0; x <= k; x++) {
+        for (int y = 0; y <= k; y++) {
+            int z = s - x - y;
+            if (z >= 0 && z <= k) {
+                count++;
+            }
+        }
+    }
+
+    cout << count << endl;
+    return 0;
+}`,
+        tags: ["fro", "if-else"],
+        solution: "",
+        language: "cpp",
+      },
   // ...其他題解
 ];

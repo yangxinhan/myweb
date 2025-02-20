@@ -3,7 +3,7 @@ import { Navbar } from "../components/ui/navbar";
 import { BentoGrid } from "../components/ui/bento-grid";
 import { BentoGridItem } from "../components/ui/bento-grid-item";
 import Image from "next/image";
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import { FaDiscord, FaFacebook, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
 import { GitHubProjects } from "../components/ui/github-projects";
 import { SolutionsGrid } from "../components/ui/solutions-collection";
 
@@ -81,6 +81,12 @@ export default function Home() {
           <a href="https://instagram.com/yxh_0404" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
             <FaInstagram/>
           </a>
+          <a href="https://www.facebook.com/share/164AWci5f3/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
+            <FaFacebook/>
+          </a>
+          <a href="https://discord.com/users/1064141576512745542" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
+            <FaDiscord />
+          </a>
           <a href="https://linkedin.com/in/昕翰-楊-93678b351" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
             <FaLinkedin />
           </a>
@@ -93,7 +99,7 @@ export default function Home() {
       title: "Languages and Tools",
       description: (
         <div className="flex flex-wrap gap-2">
-          {["HTML","CSS", "JavaScript", "TypeScript", "C", "C#", "C++", "Python", "Swift", "Markdown", "Arduino", "bots", "discordjs", "nodejs", "npm" , "opencv", "pytorch", "unity", "unreal", "anaconda", "azure", "blender", "docker", "figma", "firebase", "git", "github", "gitlab", "mysql", "notion","photoshop","Premiere","pycharm", "visualstudio", "vscode"  ,"apple" ,"windows" ,"linux", "kali", "ros", "raspberrypi"].map((skill) => (
+          {["HTML","CSS", "JavaScript", "TypeScript", "C", "C#", "C++", "Python", "Swift", "Recat", "Markdown", "Arduino", "Bots", "Discordjs", "Node.js", "npm" , "Opencv", "Pytorch", "Unity", "Unreal", "Anaconda", "Azure", "Blender", "Docker", "Figma", "Firebase", "Git", "Github", "Gitlab", "MySQL", "Notion","PhotoShop","Premiere","Pycharm", "VisualStudio", "VScode"  ,"Apple" ,"windows" ,"Linux", "Kali", "Ros", "Raspberry Pi"].map((skill) => (
             <span key={skill} className="bg-white/10 px-3 py-1 rounded-full text-sm text-white">
               {skill}
             </span>

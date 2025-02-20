@@ -51,11 +51,19 @@ interface SolutionsGridProps {
 }
 
 export const SolutionsGrid = ({ limit, minimal = false, filter = 'all' }: SolutionsGridProps) => {
-  let displaySolutions = solutions;
+  // 先依照日期排序
+  let displaySolutions = [...solutions].sort((a, b) => {
+    const dateA = new Date(a.date || '').getTime();
+    const dateB = new Date(b.date || '').getTime();
+    return dateB - dateA;  // 從新到舊排序
+  });
   
+  // 再進行過濾
   if (filter !== 'all') {
-    displaySolutions = solutions.filter(s => s.platform === filter);
+    displaySolutions = displaySolutions.filter(s => s.platform === filter);
   }
+  
+  // 最後進行限制
   if (limit) {
     displaySolutions = displaySolutions.slice(0, limit);
   }
