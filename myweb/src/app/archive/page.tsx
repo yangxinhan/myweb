@@ -1,5 +1,6 @@
 import { Navbar } from "../../components/ui/navbar";
 import { Timeline } from "../../components/ui/timeline";
+import { ArchiveStats } from "../../components/ui/archive-stats";
 import Image from "next/image";
 import { getAllTimelineItems } from "../../lib/timeline-utils";
 
@@ -25,8 +26,13 @@ export default async function ArchivePage() {
         <Navbar />
         <div className="container mx-auto px-4 pt-24">
           <h1 className="text-3xl font-bold text-white mb-8">歸檔</h1>
-          <div className="max-w-3xl mx-auto">
-            <Timeline items={timelineItems} />
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="lg:col-span-3">
+              <Timeline items={timelineItems} />
+            </div>
+            <div className="lg:col-span-1">
+              <ArchiveStats items={timelineItems} />
+            </div>
           </div>
         </div>
       </div>
