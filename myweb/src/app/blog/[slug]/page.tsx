@@ -42,7 +42,7 @@ export default async function BlogPost({
                 )}
               </div>
             </div>
-            <ClientContent post={post} />
+            <ClientContent content={post.content} />
           </div>
         </div>
       </div>

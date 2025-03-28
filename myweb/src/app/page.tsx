@@ -1,11 +1,10 @@
 "use client";
 import { Navbar } from "../components/ui/navbar";
-import { BentoGrid } from "../components/ui/bento-grid";
-import { BentoGridItem } from "../components/ui/bento-grid-item";
-import Image from "next/image";
-import { FaDiscord, FaFacebook, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import { GitHubProjects } from "../components/ui/github-projects";
 import { SolutionsGrid } from "../components/ui/solutions-collection";
+import { FaGithub, FaInstagram, FaFacebook, FaDiscord, FaLinkedin } from "react-icons/fa";
+import GithubProjects from "../components/ui/github-projects";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
@@ -127,7 +126,7 @@ export default function Home() {
     },
     {
       title: "作品集",
-      description: <GitHubProjects />,
+      description: <GithubProjects />,
       header: "Portfolio",
       className: "md:col-span-3",
     },
@@ -144,7 +143,7 @@ export default function Home() {
           priority
           className="object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg黑色/70" />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       {/* Content */}
@@ -163,17 +162,14 @@ export default function Home() {
 
         {/* Bento Grid Section */}
         <section className="max-w-7xl mx-auto px-4 py-20">
-          <BentoGrid className="mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {items.map((item, i) => (
-              <BentoGridItem
-                key={i}
-                title={item.title}
-                description={item.description}
-                header={item.header}
-                className={item.className}
-              />
+              <div key={i} className={`p-6 bg-neutral-800 rounded-xl ${item.className}`}>
+                <div className="text-lg font-bold mb-4">{item.header}</div>
+                <div className="text-sm text-neutral-400">{item.description}</div>
+              </div>
             ))}
-          </BentoGrid>
+          </div>
         </section>
       </div>
     </div>

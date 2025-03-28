@@ -1,17 +1,17 @@
 "use client";
-import { useEffect, useState } from 'react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
+import { useState, useEffect } from 'react';
 
-interface ProjectReadmeProps {
+interface Props {
   owner: string;
   repo: string;
 }
 
-export function ProjectReadme({ owner, repo }: ProjectReadmeProps) {
+export function ProjectReadme({ owner, repo }: Props) {
   const [readme, setReadme] = useState<string>('');
   const [error, setError] = useState<string>('');
 
@@ -114,3 +114,4 @@ export function ProjectReadme({ owner, repo }: ProjectReadmeProps) {
     </div>
   );
 }
+

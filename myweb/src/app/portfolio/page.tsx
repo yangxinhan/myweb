@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
 import { Navbar } from "../../components/ui/navbar";
-import { GitHubProjects } from "../../components/ui/github-projects";
-import { ProjectReadme } from "../../components/ui/project-readme";
+import GithubProjects from "../../components/ui/github-projects"; // 使用默認導入
 import Image from "next/image";
 
 export default function PortfolioPage() {
@@ -31,22 +30,11 @@ export default function PortfolioPage() {
         
         <div className="container mx-auto px-4 pt-24">
           <h1 className="text-3xl font-bold text-white mb-8">作品集</h1>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
             <div className="lg:col-span-1 backdrop-blur-sm">
-              <GitHubProjects onProjectSelect={setSelectedProject} />
+              <GithubProjects onProjectSelect={setSelectedProject} />
             </div>
-            <div className="lg:col-span-2 bg-white/5 backdrop-blur-sm rounded-xl p-6 h-[calc(100vh-200px)] overflow-y-auto">
-              {selectedProject ? (
-                <ProjectReadme 
-                  owner={selectedProject.owner} 
-                  repo={selectedProject.repo} 
-                />
-              ) : (
-                <div className="text-white/60 text-center">
-                  請選擇一個專案以查看詳細信息
-                </div>
-              )}
-            </div>
+            
           </div>
         </div>
       </div>
