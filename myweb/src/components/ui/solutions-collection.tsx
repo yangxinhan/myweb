@@ -1,20 +1,16 @@
 "use client";
 import { useState } from 'react';
-import { motion } from 'framer-motion';
 import { SolutionModal } from "./solution-modal";
 import { type Solution, solutions } from '../../lib/solutions';
-
-// 移除重複的 interface 定義
 
 export const SolutionCard = ({ solution }: { solution: Solution }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
-      <motion.div
+      <div
         onClick={() => setIsModalOpen(true)}
-        className="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors border border-white/[0.1] backdrop-blur-sm cursor-pointer h-[120px] flex flex-col justify-between"
-        whileHover={{ scale: 0.995 }}
+        className="bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors border border-white/[0.1] backdrop-blur-sm cursor-pointer h-[120px] flex flex-col justify-between hover:scale-[0.995] transition-transform"
       >
         <div className="flex justify-between items-start gap-2">
           <h3 className="text-lg font-medium text-white line-clamp-2 flex-1">{solution.title}</h3>
@@ -33,7 +29,7 @@ export const SolutionCard = ({ solution }: { solution: Solution }) => {
             </span>
           ))}
         </div>
-      </motion.div>
+      </div>
 
       <SolutionModal
         solution={solution}
