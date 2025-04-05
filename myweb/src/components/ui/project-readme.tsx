@@ -5,10 +5,19 @@ import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 
 interface Props {
   owner: string;
   repo: string;
+}
+
+interface CustomComponents {
+  props: {
+    src?: string;
+    alt?: string;
+    [key: string]: unknown;
+  };
 }
 
 export function ProjectReadme({ owner, repo }: Props) {
@@ -96,8 +105,16 @@ export function ProjectReadme({ owner, repo }: Props) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, [rehypeHighlight, { detect: true }]]}
         components={{
-          img: ({ ...props }) => (
-            <img className="max-w-full h-auto" {...props} alt={props.alt || ''} />
+          img: ({ src, alt, ...props }: CustomComponents['props']) => (
+            <div className="relative w-full h-64">
+              <Image 
+                fill
+                src={src || ''}
+                alt={alt || ''}
+                className="object-contain"
+                {...props}
+              />
+            </div>
           ),
           a: ({ ...props }) => (
             <a target="_blank" rel="noopener noreferrer" {...props} />

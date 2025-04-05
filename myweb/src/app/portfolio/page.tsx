@@ -1,15 +1,9 @@
 "use client";
-import { useState } from "react";
 import { Navbar } from "../../components/ui/navbar";
 import GithubProjects from "../../components/ui/github-projects"; // 使用默認導入
 import Image from "next/image";
 
 export default function PortfolioPage() {
-  const [selectedProject, setSelectedProject] = useState<{
-    owner: string;
-    repo: string;
-  } | null>(null);
-
   return (
     <div className="w-full min-h-screen bg-black relative">
       {/* Background */}
@@ -32,7 +26,7 @@ export default function PortfolioPage() {
           <h1 className="text-3xl font-bold text-white mb-8">作品集</h1>
           <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
             <div className="lg:col-span-1 backdrop-blur-sm">
-              <GithubProjects onProjectSelect={setSelectedProject} />
+              <GithubProjects />
             </div>
             
           </div>

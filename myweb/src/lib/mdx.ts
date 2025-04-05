@@ -9,7 +9,7 @@ export interface BlogPost {
   title: string;
   date: string;
   description?: string;
-  content: any;
+  content: string; // 改為明確的類型
 }
 
 export async function getAllBlogPosts() {

@@ -4,11 +4,14 @@ import { ClientContent } from '../../../components/ui/client-content';
 import Image from 'next/image';
 import 'highlight.js/styles/github-dark.css';
 
-export default async function BlogPost({
-  params,
-}: {
-  params: { slug: string };
-}) {
+interface BlogPostParams {
+  params: {
+    slug: string;
+  };
+  searchParams: { [key: string]: string | string[] | undefined };
+}
+
+export default async function BlogPost({ params }: BlogPostParams) {
   const post = await getBlogPost(params.slug);
 
   return (

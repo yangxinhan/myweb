@@ -3,7 +3,6 @@ import { Navbar } from "../components/ui/navbar";
 import { SolutionsGrid } from "../components/ui/solutions-collection";
 import { FaGithub, FaInstagram, FaFacebook, FaDiscord, FaLinkedin } from "react-icons/fa";
 import GithubProjects from "../components/ui/github-projects";
-import Link from "next/link";
 import Image from "next/image";
 
 export default function Home() {
