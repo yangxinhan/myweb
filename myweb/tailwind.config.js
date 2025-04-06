@@ -50,11 +50,16 @@ module.exports = {
         modalSlideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' }
+        },
+        'move-forever': {
+          '0%': { transform: 'translate3d(-90px, 0, 0)' },
+          '100%': { transform: 'translate3d(85px, 0, 0)' }
         }
       },
       animation: {
         fadeIn: 'fadeIn 0.2s ease-out',
-        modalSlideUp: 'modalSlideUp 0.3s ease-out'
+        modalSlideUp: 'modalSlideUp 0.3s ease-out',
+        'move-forever': 'move-forever 25s cubic-bezier(0.55, 0.5, 0.45, 0.5) infinite'
       }
     },
   },

@@ -1,7 +1,7 @@
 "use client";
 import { useState } from 'react';
 import { SolutionModal } from "./solution-modal";
-import { type Solution, solutions } from '../../lib/solutions';
+import { type Solution } from '../../lib/solutions';
 
 export const SolutionCard = ({ solution }: { solution: Solution }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -41,24 +41,37 @@ export const SolutionCard = ({ solution }: { solution: Solution }) => {
 };
 
 interface SolutionsGridProps {
+  solutions: Solution[];
   limit?: number;
   minimal?: boolean;
-  filter?: string;
+  filter?: string; // 新增分類過濾屬性
 }
 
-export const SolutionsGrid = ({ limit, minimal = false, filter = 'all' }: SolutionsGridProps) => {
+export const SolutionsGrid = ({
+  solutions = [],
+  limit,
+  minimal = false,
+  filter = "all",
+}: SolutionsGridProps) => {
+  if (!Array.isArray(solutions)) {
+    console.error("SolutionsGrid: solutions is not an array", solutions);
+    return null;
+  }
+
   // 先依照日期排序
   let displaySolutions = [...solutions].sort((a, b) => {
     const dateA = new Date(a.date || '').getTime();
     const dateB = new Date(b.date || '').getTime();
     return dateB - dateA;  // 從新到舊排序
   });
-  
-  // 再進行過濾
-  if (filter !== 'all') {
-    displaySolutions = displaySolutions.filter(s => s.platform === filter);
+
+  // 再進行分類過濾
+  if (filter !== "all") {
+    displaySolutions = displaySolutions.filter(
+      (solution) => solution.platform === filter
+    );
   }
-  
+
   // 最後進行限制
   if (limit) {
     displaySolutions = displaySolutions.slice(0, limit);

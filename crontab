@@ -1,0 +1,2 @@
+# 每天早上 6 點執行更新腳本
+0 6 * * * root /app/fetch-updates.sh >> /var/log/cron.log 2>&1

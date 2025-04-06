@@ -1,7 +1,8 @@
 import { getAllBlogPosts } from './mdx';
+import { solutions } from '../lib/solutions';  // 添加這行導入
 
-// 新增類型定義
-interface TimelineItem {
+// 將介面導出
+export interface TimelineItem {
   type: 'project' | 'solution' | 'blog';
   title: string;
   date: string;

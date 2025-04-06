@@ -4,15 +4,9 @@ import { ClientContent } from '../../../components/ui/client-content';
 import Image from 'next/image';
 import 'highlight.js/styles/github-dark.css';
 
-interface BlogPostParams {
-  params: {
-    slug: string;
-  };
-  searchParams: { [key: string]: string | string[] | undefined };
-}
-
-export default async function BlogPost({ params }: BlogPostParams) {
-  const post = await getBlogPost(params.slug);
+export default async function Page(props: any) {
+  const { slug } = props.params;
+  const post = await getBlogPost(slug);
 
   return (
     <div className="w-full min-h-screen bg-black relative">
@@ -37,12 +31,8 @@ export default async function BlogPost({ params }: BlogPostParams) {
               <h1 className="text-4xl font-bold text-white mb-4">{post.title}</h1>
               <div className="flex items-center gap-4 text-sm text-white/60">
                 <time>{new Date(post.date).toLocaleDateString('zh-TW')}</time>
-                {post.description && (
-                  <span className="text-white/40">·</span>
-                )}
-                {post.description && (
-                  <span>{post.description}</span>
-                )}
+                {post.description && <span className="text-white/40">·</span>}
+                {post.description && <span>{post.description}</span>}
               </div>
             </div>
             <ClientContent content={post.content} />
@@ -51,4 +41,9 @@ export default async function BlogPost({ params }: BlogPostParams) {
       </div>
     </div>
   );
+}
+
+// 確保頁面可以被靜態生成
+export async function generateStaticParams() {
+  return []; // 在建置時不預先產生任何頁面，因為博客文章可能會不斷變化
 }

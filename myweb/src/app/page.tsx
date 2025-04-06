@@ -4,40 +4,10 @@ import { SolutionsGrid } from "../components/ui/solutions-collection";
 import { FaGithub, FaInstagram, FaFacebook, FaDiscord, FaLinkedin } from "react-icons/fa";
 import GithubProjects from "../components/ui/github-projects";
 import Image from "next/image";
+import { solutions } from "../lib/solutions"; // 確保導入 solutions
 
 export default function Home() {
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
-
-  const solutions = [
-    {
-      id: 1,
-      title: "LeetCode #1 Two Sum",
-      difficulty: "Easy",
-      category: "Array",
-      link: "https://leetcode.com/problems/two-sum/",
-    },
-    {
-      id: 2,
-      title: "LeetCode #217 Contains Duplicate",
-      difficulty: "Easy",
-      category: "Hash Table",
-      link: "https://leetcode.com/problems/contains-duplicate/",
-    },
-    {
-      id: 3,
-      title: "LeetCode #53 Maximum Subarray",
-      difficulty: "Medium",
-      category: "DP",
-      link: "https://leetcode.com/problems/maximum-subarray/",
-    },
-    {
-      id: 4,
-      title: "LeetCode #121 Best Time to Buy",
-      difficulty: "Easy",
-      category: "Array",
-      link: "https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",
-    },
-  ];
 
   const items = [
     {
@@ -112,12 +82,15 @@ export default function Home() {
       description: (
         <div className="relative">
           <div className="absolute -top-11 right-0">
-            <a href={`${basePath}/solutions/`} className="text-sm text-neutral-400 hover:text-white transition-colors flex items-center gap-1">
+            <a
+              href="/solutions/"
+              className="text-sm text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
+            >
               More
               <span className="text-lg">→</span>
             </a>
           </div>
-          <SolutionsGrid solutions={solutions} limit={6} minimal />
+          <SolutionsGrid solutions={solutions} limit={6} minimal /> {/* 傳遞 solutions */}
         </div>
       ),
       header: "Solutions",

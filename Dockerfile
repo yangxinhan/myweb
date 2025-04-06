@@ -1,28 +1,28 @@
-# 1. 建立階段（建構 Next.js 專案）
-FROM node:18 AS builder
+FROM ubuntu:20.04
 
+# 安裝必要的工具
+RUN apt-get update && apt-get install -y \
+    git \
+    cron \
+    && rm -rf /var/lib/apt/lists/*
+
+# 設定工作目錄
 WORKDIR /app
 
-COPY package*.json ./
-RUN npm install
+# 複製腳本到容器中
+COPY fetch-updates.sh /app/fetch-updates.sh
 
-COPY . .
-RUN npm run build
+# 設定腳本執行權限
+RUN chmod +x /app/fetch-updates.sh
 
-# 2. 運行階段（使用 Next.js 提供網站）
-FROM node:18-alpine AS runner
+# 複製 crontab 設定
+COPY crontab /etc/cron.d/fetch-updates-cron
 
-WORKDIR /app
+# 設定 crontab 權限
+RUN chmod 0644 /etc/cron.d/fetch-updates-cron
 
-ENV NODE_ENV production
+# 啟用 cron
+RUN crontab /etc/cron.d/fetch-updates-cron
 
-# 複製 build 出來的檔案
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next ./.next
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder /app/next.config.js ./next.config.js
-
-EXPOSE 3000
-
-CMD ["npm", "start"]
+# 啟動容器時執行 cron
+CMD ["cron", "-f"]
