@@ -1,13 +1,14 @@
 {
   "name": "myweb",
+  "homepage": "https://yangxinhan.github.io/myweb",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "deploy": "next build && touch out/.nojekyll && git checkout -B gh-pages && git add -f out/ && git commit -m \"Deploy to gh-pages\" && git subtree push --prefix out origin gh-pages && git checkout -",
     "start": "next start -p 3000",
-    "lint": "next lint",
-    "deploy": "next build && touch out/.nojekyll"
+    "lint": "next lint"
   },
   "dependencies": {
     "clsx": "^2.0.0",
