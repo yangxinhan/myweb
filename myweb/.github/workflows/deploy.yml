@@ -16,15 +16,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+      
+      - name: Change to project directory
+        run: cd myweb
           
       - name: Install dependencies
+        working-directory: ./myweb
         run: npm ci
         
       - name: Build
+        working-directory: ./myweb
         run: npm run build
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./out
+          publish_dir: ./myweb/out
