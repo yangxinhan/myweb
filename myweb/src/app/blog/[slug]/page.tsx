@@ -1,11 +1,19 @@
-import { getBlogPost } from '../../../lib/mdx';
+import { getBlogPost, getAllBlogPosts } from '../../../lib/mdx';
 import { Navbar } from '../../../components/ui/navbar';
 import { ClientContent } from '../../../components/ui/client-content';
 import Image from 'next/image';
 import 'highlight.js/styles/github-dark.css';
 
-export default async function Page(props: any) {
-  const { slug } = props.params;
+interface GenerateParams {
+  slug: string;
+}
+
+export default async function Page({
+  params,
+}: {
+  params: Promise<GenerateParams>
+}) {
+  const { slug } = await params;
   const post = await getBlogPost(slug);
 
   return (
@@ -43,7 +51,9 @@ export default async function Page(props: any) {
   );
 }
 
-// 確保頁面可以被靜態生成
-export async function generateStaticParams() {
-  return []; // 在建置時不預先產生任何頁面，因為博客文章可能會不斷變化
+export async function generateStaticParams(): Promise<GenerateParams[]> {
+  const posts = await getAllBlogPosts();
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }

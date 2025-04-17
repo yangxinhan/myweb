@@ -3,7 +3,12 @@ import { useState } from 'react';
 import { SolutionModal } from "./solution-modal";
 import { type Solution } from '../../lib/solutions';
 
-export const SolutionCard = ({ solution }: { solution: Solution }) => {
+interface SolutionCardProps {
+  solution: Solution;
+  minimal?: boolean;
+}
+
+export const SolutionCard = ({ solution, minimal = false }: SolutionCardProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -22,12 +27,15 @@ export const SolutionCard = ({ solution }: { solution: Solution }) => {
             {solution.difficulty}
           </span>
         </div>
-        <div className="flex flex-wrap gap-2">
-          {solution.tags?.map(tag => (
-            <span key={tag} className="text-xs text-blue-300 bg-blue-500/10 px-2 py-1 rounded">
-              {tag}
-            </span>
-          ))}
+        <div className="flex justify-between items-end">
+          <span className="text-xs text-white/60 bg-white/5 px-2 py-1 rounded">
+            {solution.platform}
+          </span>
+          {!minimal && (
+            <time className="text-xs text-white/40">
+              {new Date(solution.date).toLocaleDateString('zh-TW')}
+            </time>
+          )}
         </div>
       </div>
 

@@ -6,6 +6,10 @@ export interface Solution {
   link: string;
   date: string;
   tags?: string[];
+  problem?: string;
+  solution?: string;
+  code?: string;
+  language?: string;
 }
 
 // 確保 solutions 是一個有效的陣列，並包含所有題解

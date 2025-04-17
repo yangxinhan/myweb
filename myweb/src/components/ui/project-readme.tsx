@@ -12,12 +12,9 @@ interface Props {
   repo: string;
 }
 
-interface CustomComponents {
-  props: {
-    src?: string;
-    alt?: string;
-    [key: string]: unknown;
-  };
+interface GitHubFile {
+  name: string;
+  url: string;
 }
 
 export function ProjectReadme({ owner, repo }: Props) {
@@ -43,10 +40,10 @@ export function ProjectReadme({ owner, repo }: Props) {
           const dirResponse = await fetch(
             `https://api.github.com/repos/${owner}/${repo}/contents/`
           );
-          const files = await dirResponse.json();
+          const files: GitHubFile[] = await dirResponse.json();
           
           // 尋找第一個 .md 檔案
-          const mdFile = files.find((file: any) => file.name.endsWith('.md'));
+          const mdFile = files.find((file) => file.name.endsWith('.md'));
           
           if (mdFile) {
             response = await fetch(mdFile.url, {
@@ -105,17 +102,22 @@ export function ProjectReadme({ owner, repo }: Props) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, [rehypeHighlight, { detect: true }]]}
         components={{
-          img: ({ src, alt, ...props }: CustomComponents['props']) => (
-            <div className="relative w-full h-64">
-              <Image 
-                fill
-                src={src || ''}
-                alt={alt || ''}
-                className="object-contain"
-                {...props}
-              />
-            </div>
-          ),
+          img: ({ src, alt }) => {
+            if (!src || typeof src !== 'string') {
+              return null;
+            }
+            return (
+              <div className="relative w-full h-64">
+                <Image 
+                  fill
+                  src={src}
+                  alt={alt || ''}
+                  className="object-contain"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                />
+              </div>
+            );
+          },
           a: ({ ...props }) => (
             <a target="_blank" rel="noopener noreferrer" {...props} />
           ),

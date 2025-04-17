@@ -4,11 +4,15 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
-import Image from 'next/image';
+import { DetailedHTMLProps, HTMLAttributes } from 'react';
 
 interface ClientContentProps {
   content: string; 
 }
+
+type CodeProps = DetailedHTMLProps<HTMLAttributes<HTMLElement>, HTMLElement> & {
+  inline?: boolean;
+};
 
 export function ClientContent({ content }: ClientContentProps) {
   return (
@@ -17,17 +21,6 @@ export function ClientContent({ content }: ClientContentProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, [rehypeHighlight, { detect: true }]]}
         components={{
-          img: ({ alt, src, ...props }) => (
-            <div className="relative w-full h-64">
-              <Image 
-                fill
-                src={src || ''}
-                alt={alt || ''}
-                className="object-contain"
-                {...props}
-              />
-            </div>
-          ),
           a: ({ children, href, ...props }) => (
             <a 
               href={href}
@@ -39,7 +32,7 @@ export function ClientContent({ content }: ClientContentProps) {
               {children}
             </a>
           ),
-          code: ({inline, className, children, ...props}) => {
+          code: ({ inline, className, children, ...props }: CodeProps) => {
             const match = /language-(\w+)/.exec(className || '');
             return !inline && match ? (
               <pre className="bg-gray-900 rounded-lg p-4">

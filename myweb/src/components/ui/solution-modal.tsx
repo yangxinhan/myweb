@@ -1,5 +1,5 @@
 "use client";
-import { Solution } from "./solutions-collection";
+import { Solution } from "../../lib/solutions";
 import { useEffect } from "react";
 import hljs from 'highlight.js/lib/core';
 import cpp from 'highlight.js/lib/languages/cpp';
@@ -79,7 +79,7 @@ export const SolutionModal = ({ solution, isOpen, onClose }: SolutionModalProps)
                   </span>
                 </div>
                 <div className="flex flex-wrap gap-2">
-                  {solution.tags?.map(tag => (
+                  {solution.tags?.map((tag: string) => (
                     <span key={tag} className="text-xs text-blue-300 bg-blue-500/10 px-2 py-1 rounded">
                       {tag}
                     </span>
