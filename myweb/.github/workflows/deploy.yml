@@ -31,14 +31,15 @@ jobs:
         run: npm run build
 
       - name: Prepare deployment
-        working-directory: ./myweb
         run: |
-          touch out/.nojekyll
-          cp -r out/* ../docs/
-          touch ../docs/.nojekyll
-        
+          mkdir -p docs/_site
+          cp -r myweb/out/* docs/
+          touch docs/.nojekyll
+          touch docs/_site/.nojekyll
+          
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          branch: gh-pages
           folder: docs
           clean: true

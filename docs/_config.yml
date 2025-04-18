@@ -1,0 +1,16 @@
+title: 我的個人網站
+description: 個人網站紀錄學習歷程
+baseurl: "/myweb"
+url: "https://yangxinhan.github.io"
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-primer
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - package.json
+  - package-lock.json
+  - README.md
+  - CNAME
