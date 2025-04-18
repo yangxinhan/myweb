@@ -1,12 +1,13 @@
-import type { NextConfig } from "next";
+/** @type {import('next').NextConfig} */
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
   },
-  distDir: 'dist',
-  basePath: process.env.NODE_ENV === 'production' ? '/myweb' : ''
+  basePath: '/myweb',
+  assetPrefix: '/myweb/',
+  trailingSlash: true
 };
 
 export default nextConfig;
