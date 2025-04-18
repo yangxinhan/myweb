@@ -13,7 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
       
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -28,16 +29,17 @@ jobs:
         working-directory: ./myweb
         run: npm run build
         
-      - name: Prepare files
-        working-directory: ./myweb
+      - name: Prepare for deployment
         run: |
-          cd out
-          touch .nojekyll
-          echo "/* /index.html 200" > _redirects
-          cp index.html 404.html
+          rm -rf gh-pages
+          mkdir gh-pages
+          cp -r myweb/out/* gh-pages/
+          touch gh-pages/.nojekyll
+          echo "yangxinhan.github.io" > gh-pages/CNAME
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: myweb/out
+          branch: gh-pages
+          folder: gh-pages
           clean: true
