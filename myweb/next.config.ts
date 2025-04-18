@@ -7,8 +7,7 @@ const nextConfig = {
   },
   basePath: '/myweb',
   assetPrefix: '/myweb/',
-  trailingSlash: true,
-  distDir: 'out'
+  trailingSlash: true
 };
 
 export default nextConfig;
