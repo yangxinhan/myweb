@@ -19,8 +19,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
-          cache-dependency-path: './myweb/package-lock.json'
           
       - name: Install dependencies
         working-directory: ./myweb
@@ -29,17 +27,9 @@ jobs:
       - name: Build
         working-directory: ./myweb
         run: npm run build
-
-      - name: Prepare deployment
-        run: |
-          mkdir -p docs/_site
-          cp -r myweb/out/* docs/
-          touch docs/.nojekyll
-          touch docs/_site/.nojekyll
-          
+        
       - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          branch: gh-pages
-          folder: docs
-          clean: true
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./myweb/out
