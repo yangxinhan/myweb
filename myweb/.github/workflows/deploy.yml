@@ -19,22 +19,26 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: './myweb/package-lock.json'
           
       - name: Install dependencies
         working-directory: ./myweb
-        run: npm install
+        run: npm ci
         
       - name: Build
         working-directory: ./myweb
         run: npm run build
-        
-      - name: Add .nojekyll file
+
+      - name: Prepare deployment
         working-directory: ./myweb
-        run: touch ./out/.nojekyll
+        run: |
+          touch out/.nojekyll
+          cp -r out/* ../docs/
+          touch ../docs/.nojekyll
         
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          branch: gh-pages
-          folder: myweb/out
+          folder: docs
           clean: true
