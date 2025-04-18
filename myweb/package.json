@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "next build && touch out/.nojekyll && gh-pages -d out -t true"
+    "predeploy": "next build",
+    "deploy": "gh-pages -d out -t true"
   },
   "dependencies": {
     "@heroicons/react": "^2.2.0",
