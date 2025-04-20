@@ -1,5 +1,5 @@
 import { getAllBlogPosts } from './mdx';
-import { solutions } from '../lib/solutions';  // 添加這行導入
+import { solutions } from './solutions';  // 添加這行導入
 
 // 將介面導出
 export interface TimelineItem {
