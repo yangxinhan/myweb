@@ -1,1 +1,162 @@
-(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[492],{3632:(e,t,r)=>{"use strict";Object.defineProperty(t,"__esModule",{value:!0}),Object.defineProperty(t,"default",{enumerable:!0,get:function(){return o}});let l=r(5155),n=r(6395);function o(){return(0,l.jsx)(n.HTTPAccessErrorFallback,{status:404,message:"This page could not be found."})}("function"==typeof t.default||"object"==typeof t.default&&null!==t.default)&&void 0===t.default.__esModule&&(Object.defineProperty(t.default,"__esModule",{value:!0}),Object.assign(t.default,t),e.exports=t.default)},3868:(e,t,r)=>{(window.__NEXT_P=window.__NEXT_P||[]).push(["/_not-found/page",function(){return r(3632)}])},6395:(e,t,r)=>{"use strict";Object.defineProperty(t,"__esModule",{value:!0}),Object.defineProperty(t,"HTTPAccessErrorFallback",{enumerable:!0,get:function(){return o}}),r(8229);let l=r(5155);r(2115);let n={error:{fontFamily:'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',height:"100vh",textAlign:"center",display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center"},desc:{display:"inline-block"},h1:{display:"inline-block",margin:"0 20px 0 0",padding:"0 23px 0 0",fontSize:24,fontWeight:500,verticalAlign:"top",lineHeight:"49px"},h2:{fontSize:14,fontWeight:400,lineHeight:"49px",margin:0}};function o(e){let{status:t,message:r}=e;return(0,l.jsxs)(l.Fragment,{children:[(0,l.jsx)("title",{children:t+": "+r}),(0,l.jsx)("div",{style:n.error,children:(0,l.jsxs)("div",{children:[(0,l.jsx)("style",{dangerouslySetInnerHTML:{__html:"body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"}}),(0,l.jsx)("h1",{className:"next-error-h1",style:n.h1,children:t}),(0,l.jsx)("div",{style:n.desc,children:(0,l.jsx)("h2",{style:n.h2,children:r})})]})})]})}("function"==typeof t.default||"object"==typeof t.default&&null!==t.default)&&void 0===t.default.__esModule&&(Object.defineProperty(t.default,"__esModule",{value:!0}),Object.assign(t.default,t),e.exports=t.default)}},e=>{var t=t=>e(e.s=t);e.O(0,[441,684,358],()=>t(3868)),_N_E=e.O()}]);
+(self["webpackChunk_N_E"] = self["webpackChunk_N_E"] || []).push([[492],{
+
+/***/ 3632:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+Object.defineProperty(exports, "default", ({
+    enumerable: true,
+    get: function() {
+        return NotFound;
+    }
+}));
+const _jsxruntime = __webpack_require__(5155);
+const _errorfallback = __webpack_require__(6395);
+function NotFound() {
+    return /*#__PURE__*/ (0, _jsxruntime.jsx)(_errorfallback.HTTPAccessErrorFallback, {
+        status: 404,
+        message: "This page could not be found."
+    });
+}
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+    Object.defineProperty(exports.default, '__esModule', {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=not-found-error.js.map
+
+
+/***/ }),
+
+/***/ 3868:
+/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+
+
+    (window.__NEXT_P = window.__NEXT_P || []).push([
+      "/_not-found/page",
+      function () {
+        return __webpack_require__(3632);
+      }
+    ]);
+    if(false) {}
+  
+
+/***/ }),
+
+/***/ 6395:
+/***/ ((module, exports, __webpack_require__) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({
+    value: true
+}));
+Object.defineProperty(exports, "HTTPAccessErrorFallback", ({
+    enumerable: true,
+    get: function() {
+        return HTTPAccessErrorFallback;
+    }
+}));
+const _interop_require_default = __webpack_require__(8229);
+const _jsxruntime = __webpack_require__(5155);
+const _react = /*#__PURE__*/ _interop_require_default._(__webpack_require__(2115));
+const styles = {
+    error: {
+        // https://github.com/sindresorhus/modern-normalize/blob/main/modern-normalize.css#L38-L52
+        fontFamily: 'system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji"',
+        height: '100vh',
+        textAlign: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    desc: {
+        display: 'inline-block'
+    },
+    h1: {
+        display: 'inline-block',
+        margin: '0 20px 0 0',
+        padding: '0 23px 0 0',
+        fontSize: 24,
+        fontWeight: 500,
+        verticalAlign: 'top',
+        lineHeight: '49px'
+    },
+    h2: {
+        fontSize: 14,
+        fontWeight: 400,
+        lineHeight: '49px',
+        margin: 0
+    }
+};
+function HTTPAccessErrorFallback(param) {
+    let { status, message } = param;
+    return /*#__PURE__*/ (0, _jsxruntime.jsxs)(_jsxruntime.Fragment, {
+        children: [
+            /*#__PURE__*/ (0, _jsxruntime.jsx)("title", {
+                children: status + ": " + message
+            }),
+            /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                style: styles.error,
+                children: /*#__PURE__*/ (0, _jsxruntime.jsxs)("div", {
+                    children: [
+                        /*#__PURE__*/ (0, _jsxruntime.jsx)("style", {
+                            dangerouslySetInnerHTML: {
+                                /* Minified CSS from
+                body { margin: 0; color: #000; background: #fff; }
+                .next-error-h1 {
+                  border-right: 1px solid rgba(0, 0, 0, .3);
+                }
+
+                @media (prefers-color-scheme: dark) {
+                  body { color: #fff; background: #000; }
+                  .next-error-h1 {
+                    border-right: 1px solid rgba(255, 255, 255, .3);
+                  }
+                }
+              */ __html: "body{color:#000;background:#fff;margin:0}.next-error-h1{border-right:1px solid rgba(0,0,0,.3)}@media (prefers-color-scheme:dark){body{color:#fff;background:#000}.next-error-h1{border-right:1px solid rgba(255,255,255,.3)}}"
+                            }
+                        }),
+                        /*#__PURE__*/ (0, _jsxruntime.jsx)("h1", {
+                            className: "next-error-h1",
+                            style: styles.h1,
+                            children: status
+                        }),
+                        /*#__PURE__*/ (0, _jsxruntime.jsx)("div", {
+                            style: styles.desc,
+                            children: /*#__PURE__*/ (0, _jsxruntime.jsx)("h2", {
+                                style: styles.h2,
+                                children: message
+                            })
+                        })
+                    ]
+                })
+            })
+        ]
+    });
+}
+if ((typeof exports.default === 'function' || typeof exports.default === 'object' && exports.default !== null) && typeof exports.default.__esModule === 'undefined') {
+    Object.defineProperty(exports.default, '__esModule', {
+        value: true
+    });
+    Object.assign(exports.default, exports);
+    module.exports = exports.default;
+} //# sourceMappingURL=error-fallback.js.map
+
+
+/***/ })
+
+},
+/******/ __webpack_require__ => { // webpackRuntimeModules
+/******/ var __webpack_exec__ = (moduleId) => (__webpack_require__(__webpack_require__.s = moduleId))
+/******/ __webpack_require__.O(0, [441,684,358], () => (__webpack_exec__(3868)));
+/******/ var __webpack_exports__ = __webpack_require__.O();
+/******/ _N_E = __webpack_exports__;
+/******/ }
+]);
