@@ -36,7 +36,7 @@ export async function getAllTimelineItems(): Promise<TimelineItem[]> {
     type: 'blog' as const,
     title: post.title,
     date: post.date,
-    link: `/blog/${post.slug}`,
+    link: `/myweb/blog/${post.slug}`,
     description: post.description
   })));
 
@@ -48,7 +48,7 @@ export async function getAllTimelineItems(): Promise<TimelineItem[]> {
       type: 'project' as const,
       title: repo.name,
       date: repo.created_at,
-      link: `/portfolio?repo=${repo.name}`,
+      link: `/myweb/portfolio?repo=${repo.name}`,
       description: repo.description || undefined
     })));
   } catch (error) {
@@ -56,7 +56,11 @@ export async function getAllTimelineItems(): Promise<TimelineItem[]> {
   }
 
   // 獲取題解
-  items.push(...getSolutions());
+  const solutionItems = getSolutions();
+  items.push(...solutionItems.map(solution => ({
+    ...solution,
+    link: `/myweb/solutions${solution.link}`
+  })));
 
   // 依照日期排序
   return items.sort((a, b) => 

@@ -83,14 +83,14 @@ export default function Home() {
         <div className="relative">
           <div className="absolute -top-11 right-0">
             <a
-              href="/solutions/"
+              href="/myweb/solutions/"
               className="text-sm text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
             >
               More
               <span className="text-lg">→</span>
             </a>
           </div>
-          <SolutionsGrid solutions={solutions} limit={6} minimal /> {/* 傳遞 solutions */}
+          <SolutionsGrid solutions={solutions} limit={6} minimal />
         </div>
       ),
       header: "Solutions",
