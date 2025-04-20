@@ -21,7 +21,7 @@ export default async function Page({
       {/* Background */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/背景.png"
+          src="/myweb/background.png"
           alt="Background"
           fill
           priority

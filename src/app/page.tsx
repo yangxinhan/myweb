@@ -17,7 +17,7 @@ export default function Home() {
         <div className="flex items-center justify-center w-full h-full bg-neutral-900/50 rounded-xl p-4">
           <div className="relative w-32 h-32">
             <Image
-              src="/頭貼.JPG"
+              src="/myweb/profile.jpg"
               alt="Profile"
               fill
               className="rounded-full object-cover border-2 border-white/20"
@@ -109,13 +109,13 @@ export default function Home() {
       {/* Background */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/背景.png"
+          src="/myweb/background.png"
           alt="Background"
           fill
           priority
           className="object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg黑色/70" />
+        <div className="absolute inset-0 bg-black/70" />
       </div>
 
       {/* Content */}
