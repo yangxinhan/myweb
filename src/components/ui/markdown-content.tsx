@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
+import Image from 'next/image';
 import 'highlight.js/styles/github-dark.css';
 
 interface MarkdownContentProps {
@@ -24,9 +25,20 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
-          img: ({ ...props }) => (
-            <img className="max-w-full h-auto" {...props} alt={props.alt || ''} />
-          ),
+          img: ({ src, alt, ...props }) => {
+            if (!src) return null;
+            return (
+              <div className="relative w-full h-[400px] my-4">
+                <Image
+                  src={src}
+                  alt={alt || ''}
+                  fill
+                  className="object-contain"
+                  {...props}
+                />
+              </div>
+            );
+          },
           a: ({ ...props }) => (
             <a target="_blank" rel="noopener noreferrer" {...props} />
           ),

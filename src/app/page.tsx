@@ -7,8 +7,8 @@ import Image from "next/image";
 import { solutions } from "../lib/solutions"; // 確保導入 solutions
 
 export default function Home() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
-
+  // 移除未使用的 basePath 變數
+  
   const items = [
     {
       title: "個人簡介",
@@ -115,7 +115,7 @@ export default function Home() {
           priority
           className="object-cover opacity-60"
         />
-        <div className="absolute inset-0 bg-black/70" />
+        <div className="absolute inset-0 bg黑色/70" />
       </div>
 
       {/* Content */}
