@@ -25,8 +25,8 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeRaw, rehypeHighlight]}
         components={{
-          img: ({ src, alt, ...props }) => {
-            if (!src) return null;
+          img: ({ src, alt }) => {
+            if (!src || typeof src !== 'string') return null;
             return (
               <div className="relative w-full h-[400px] my-4">
                 <Image
@@ -34,7 +34,7 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
                   alt={alt || ''}
                   fill
                   className="object-contain"
-                  {...props}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
             );
