@@ -29,17 +29,16 @@ jobs:
         working-directory: ./myweb
         run: npm run build
         
-      - name: Prepare for deployment
+      - name: Prepare files
+        working-directory: ./myweb
         run: |
-          rm -rf gh-pages
-          mkdir gh-pages
-          cp -r myweb/out/* gh-pages/
-          touch gh-pages/.nojekyll
-          echo "yangxinhan.github.io" > gh-pages/CNAME
+          touch out/.nojekyll
+          cp out/.nojekyll out/404.html out/index.html ../
+          cp -r out/* ../
           
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: gh-pages
+          folder: .
           clean: true
