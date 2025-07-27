@@ -11,12 +11,13 @@ hljs.registerLanguage('python', python);
 hljs.registerLanguage('javascript', javascript);
 
 interface SolutionModalProps {
-  solution: Solution | null;
+  solution: Solution;
   isOpen: boolean;
   onClose: () => void;
+  basePath?: string;
 }
 
-export const SolutionModal = ({ solution, isOpen, onClose }: SolutionModalProps) => {
+export function SolutionModal({ solution, isOpen, onClose, basePath = '' }: SolutionModalProps) {
   useEffect(() => {
     if (isOpen) {
       hljs.highlightAll();
@@ -45,7 +46,11 @@ export const SolutionModal = ({ solution, isOpen, onClose }: SolutionModalProps)
   };
 
   return (
-    <div className="fixed inset-0 z-50 animate-fadeIn">
+    <div
+      className={`fixed inset-0 z-50 flex items-center justify-center ${
+        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+      } transition-opacity`}
+    >
       {/* 背景遮罩 */}
       <div 
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
@@ -110,12 +115,13 @@ export const SolutionModal = ({ solution, isOpen, onClose }: SolutionModalProps)
                 <div className="flex justify-between items-center pt-4 border-t border-white/10">
                   <span className="text-sm text-neutral-400">{solution.date}</span>
                   <a
-                    href={solution.link}
+                    href={solution.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-sm text-blue-400 hover:text-blue-300"
+                    className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"
                   >
-                    {getPlatformText(solution.platform)}
+                    在{solution.platform}上查看
+                    <span className="text-lg">→</span>
                   </a>
                 </div>
               </div>

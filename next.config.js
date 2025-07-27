@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
-  basePath: '/myweb',
+  basePath: process.env.NODE_ENV === 'production' ? '/myweb' : '',
   images: {
     unoptimized: true,
   },
@@ -11,15 +11,14 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  webpack: (config, { isServer }) => {
+  webpack: (config) => {
     config.optimization = {
       minimize: false,
       moduleIds: 'named',
       chunkIds: 'named',
-      splitChunks: isServer ? false : {
+      splitChunks: {
         cacheGroups: {
           default: false,
-          vendors: false,
         },
       },
     };
@@ -28,16 +27,6 @@ const nextConfig = {
       ...config.output,
       pathinfo: true,
     };
-
-    // 保留所有文件
-    if (!isServer) {
-      config.optimization.splitChunks = {
-        cacheGroups: {
-          default: false,
-          vendors: false,
-        },
-      };
-    }
 
     return config;
   },

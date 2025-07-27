@@ -7,7 +7,7 @@ import Image from "next/image";
 import { solutions } from "../lib/solutions"; // 確保導入 solutions
 
 export default function Home() {
-  // 移除未使用的 basePath 變數
+  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
   
   const items = [
     {
@@ -83,7 +83,7 @@ export default function Home() {
         <div className="relative">
           <div className="absolute -top-11 right-0">
             <a
-              href="/myweb/solutions/"
+              href={`${basePath}/solutions`}
               className="text-sm text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
             >
               More

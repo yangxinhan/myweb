@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import rehypeHighlight from 'rehype-highlight';
 import 'highlight.js/styles/github-dark.css';
+import Link from 'next/link';
 
 interface Repository {
   name: string;
@@ -42,50 +43,56 @@ export default function GithubProjects() {
     }
   }, [selectedRepo]);
 
+  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
   return (
     <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8">
       <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
         {/* 專案列表 - 改為 2/6 寬度 */}
         <div className="lg:col-span-2 space-y-4 max-h-[80vh] overflow-y-auto pr-4">
           {repos.map((repo) => (
-            <div
+            <Link
               key={repo.name}
-              onClick={() => setSelectedRepo(repo)}
-              className={`p-4 rounded-lg cursor-pointer transition-colors ${
-                selectedRepo?.name === repo.name
-                  ? "bg-white/20"
-                  : "bg-white/5 hover:bg-white/10"
-              }`}
+              href={`${basePath}/portfolio?repo=${repo.name}`}
+              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-colors"
             >
-              <div className="flex justify-between items-start">
-                <h3 className="font-medium text-white">{repo.name}</h3>
-                <div className="flex items-center gap-3 text-white/60">
-                  <span className="flex items-center gap-1">
-                    <FaStar className="text-yellow-500" />
-                    {repo.stargazers_count}
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <FaCodeBranch />
-                    {repo.forks_count}
-                  </span>
+              <div
+                className={`p-4 rounded-lg cursor-pointer transition-colors ${
+                  selectedRepo?.name === repo.name
+                    ? "bg-white/20"
+                    : "bg-white/5 hover:bg-white/10"
+                }`}
+              >
+                <div className="flex justify-between items-start">
+                  <h3 className="font-medium text-white">{repo.name}</h3>
+                  <div className="flex items-center gap-3 text-white/60">
+                    <span className="flex items-center gap-1">
+                      <FaStar className="text-yellow-500" />
+                      {repo.stargazers_count}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <FaCodeBranch />
+                      {repo.forks_count}
+                    </span>
+                  </div>
+                </div>
+                {repo.description && (
+                  <p className="text-sm text-white/60 mt-2">{repo.description}</p>
+                )}
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {repo.language && (
+                    <span className="text-xs px-2 py-1 bg-white/10 rounded-full text-white/80">
+                      {repo.language}
+                    </span>
+                  )}
+                  {repo.topics?.map((topic) => (
+                    <span key={topic} className="text-xs px-2 py-1 bg-blue-500/10 rounded-full text-blue-300">
+                      {topic}
+                    </span>
+                  ))}
                 </div>
               </div>
-              {repo.description && (
-                <p className="text-sm text-white/60 mt-2">{repo.description}</p>
-              )}
-              <div className="flex flex-wrap gap-2 mt-2">
-                {repo.language && (
-                  <span className="text-xs px-2 py-1 bg-white/10 rounded-full text-white/80">
-                    {repo.language}
-                  </span>
-                )}
-                {repo.topics?.map((topic) => (
-                  <span key={topic} className="text-xs px-2 py-1 bg-blue-500/10 rounded-full text-blue-300">
-                    {topic}
-                  </span>
-                ))}
-              </div>
-            </div>
+            </Link>
           ))}
         </div>
 

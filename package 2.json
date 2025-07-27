@@ -1,0 +1,30 @@
+{
+  "name": "myweb",
+  "homepage": "https://yangxinhan.github.io/myweb",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "deploy": "next build && touch out/.nojekyll && git checkout -B gh-pages && git add -f out/ && git commit -m \"Deploy to gh-pages\" && git subtree push --prefix out origin gh-pages && git checkout -",
+    "start": "next start -p 3000",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "clsx": "^2.0.0",
+    "framer-motion": "^10.16.4",
+    "next": "14.0.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "tailwind-merge": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "postcss": "^8",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}

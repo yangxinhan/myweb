@@ -15,13 +15,14 @@ export default async function Page({
 }) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
+  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
 
   return (
     <div className="w-full min-h-screen bg-black relative">
       {/* Background */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/myweb/background.png"
+          src={`${basePath}/background.png`}
           alt="Background"
           fill
           priority

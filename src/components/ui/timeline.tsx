@@ -1,6 +1,7 @@
 "use client";
 import { format } from 'date-fns';
 import Link from 'next/link';
+import { useMemo } from 'react';
 
 interface TimelineItem {
   type: 'project' | 'solution' | 'blog';
@@ -15,6 +16,27 @@ interface TimelineProps {
 }
 
 export function Timeline({ items }: TimelineProps) {
+  // 按年份分組
+  const groupedItems = useMemo(() => {
+    const groups: { [key: string]: TimelineItem[] } = {};
+    const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
+    items.forEach(item => {
+      const date = new Date(item.date);
+      const year = date.getFullYear().toString();
+      if (!groups[year]) {
+        groups[year] = [];
+      }
+      // 確保連結包含 basePath
+      groups[year].push({
+        ...item,
+        link: item.link.startsWith('http') ? item.link : `${basePath}${item.link}`
+      });
+    });
+
+    return groups;
+  }, [items]);
+
   const sortedItems = [...items].sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );

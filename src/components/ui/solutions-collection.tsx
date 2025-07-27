@@ -1,5 +1,6 @@
 "use client";
 import { useState } from 'react';
+import Link from 'next/link';
 import { SolutionModal } from "./solution-modal";
 import { type Solution } from '../../lib/solutions';
 
@@ -61,6 +62,8 @@ export const SolutionsGrid = ({
   minimal = false,
   filter = "all",
 }: SolutionsGridProps) => {
+  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+  
   if (!Array.isArray(solutions)) {
     console.error("SolutionsGrid: solutions is not an array", solutions);
     return null;
@@ -86,13 +89,34 @@ export const SolutionsGrid = ({
   }
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {displaySolutions.map((solution) => (
-        <div key={solution.id} className="w-[calc(50%-8px)]">
-          <SolutionCard
-            solution={solution}
-            minimal={minimal}
-          />
+        <div key={solution.id}>
+          <Link
+            href={`${basePath}/solutions#${solution.id}`}
+            className="block bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-colors"
+          >
+            <div className="flex justify-between items-start mb-4">
+              <h3 className="text-lg font-bold text-white">{solution.title}</h3>
+              <span className={`text-xs px-2 py-1 rounded ${
+                solution.difficulty === 'Easy' ? 'bg-green-500/20 text-green-300' :
+                solution.difficulty === 'Medium' ? 'bg-yellow-500/20 text-yellow-300' :
+                'bg-red-500/20 text-red-300'
+              }`}>
+                {solution.difficulty}
+              </span>
+            </div>
+            <div className="flex justify-between items-end">
+              <span className="text-xs text-white/60 bg-white/5 px-2 py-1 rounded">
+                {solution.platform}
+              </span>
+              {!minimal && (
+                <time className="text-xs text-white/40">
+                  {new Date(solution.date).toLocaleDateString('zh-TW')}
+                </time>
+              )}
+            </div>
+          </Link>
         </div>
       ))}
     </div>
