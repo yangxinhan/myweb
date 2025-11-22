@@ -1,128 +1,101 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FaGithub, FaStar, FaCodeBranch } from "react-icons/fa";
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
-import rehypeRaw from 'rehype-raw';
-import rehypeHighlight from 'rehype-highlight';
-import 'highlight.js/styles/github-dark.css';
-import Link from 'next/link';
+import { ProjectCard } from "./project-card";
+import { ProjectModal } from "./project-modal";
 
 interface Repository {
   name: string;
   description: string;
   html_url: string;
   created_at: string;
+  pushed_at: string;
   language: string;
   stargazers_count: number;
   forks_count: number;
   topics: string[];
 }
 
+interface Commit {
+  sha: string;
+  commit: {
+    message: string;
+    author: {
+      name: string;
+      date: string;
+    };
+  };
+  html_url: string;
+}
+
 export default function GithubProjects() {
   const [repos, setRepos] = useState<Repository[]>([]);
   const [selectedRepo, setSelectedRepo] = useState<Repository | null>(null);
   const [readme, setReadme] = useState<string>('');
+  const [latestCommit, setLatestCommit] = useState<Commit | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     fetch("https://api.github.com/users/yangxinhan/repos")
       .then((res) => res.json())
       .then((data) => {
-        setRepos(data);
-        if (data.length > 0) setSelectedRepo(data[0]);
+        // Sort by stars then date
+        const sorted = Array.isArray(data) ? data.sort((a: Repository, b: Repository) => {
+          return b.stargazers_count - a.stargazers_count || new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+        }) : [];
+        setRepos(sorted);
       })
       .catch(console.error);
   }, []);
 
-  useEffect(() => {
-    if (selectedRepo) {
-      fetch(`https://raw.githubusercontent.com/yangxinhan/${selectedRepo.name}/main/README.md`)
-        .then(res => res.text())
-        .then(text => setReadme(text))
-        .catch(() => setReadme('# No README found'));
-    }
-  }, [selectedRepo]);
+  const handleProjectClick = async (repo: Repository) => {
+    setSelectedRepo(repo);
+    setIsModalOpen(true);
+    setReadme('Loading README...');
+    setLatestCommit(null);
+    
+    try {
+      // Fetch README
+      const readmeRes = await fetch(`https://raw.githubusercontent.com/yangxinhan/${repo.name}/main/README.md`);
+      if (readmeRes.ok) {
+        const text = await readmeRes.text();
+        setReadme(text);
+      } else {
+        setReadme('# No README found\n\nThis repository does not have a README file.');
+      }
 
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+      // Fetch Latest Commit
+      const commitRes = await fetch(`https://api.github.com/repos/yangxinhan/${repo.name}/commits?per_page=1`);
+      if (commitRes.ok) {
+        const commits = await commitRes.json();
+        if (commits && commits.length > 0) {
+          setLatestCommit(commits[0]);
+        }
+      }
+    } catch (error) {
+      console.error("Error fetching project details:", error);
+      setReadme('# Error loading details\n\nFailed to fetch project details.');
+    }
+  };
 
   return (
-    <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8">
-      <div className="grid grid-cols-1 lg:grid-cols-6 gap-8">
-        {/* 專案列表 - 改為 2/6 寬度 */}
-        <div className="lg:col-span-2 space-y-4 max-h-[80vh] overflow-y-auto pr-4">
-          {repos.map((repo) => (
-            <Link
-              key={repo.name}
-              href={`${basePath}/portfolio?repo=${repo.name}`}
-              className="bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-colors"
-            >
-              <div
-                className={`p-4 rounded-lg cursor-pointer transition-colors ${
-                  selectedRepo?.name === repo.name
-                    ? "bg-white/20"
-                    : "bg-white/5 hover:bg-white/10"
-                }`}
-              >
-                <div className="flex justify-between items-start">
-                  <h3 className="font-medium text-white">{repo.name}</h3>
-                  <div className="flex items-center gap-3 text-white/60">
-                    <span className="flex items-center gap-1">
-                      <FaStar className="text-yellow-500" />
-                      {repo.stargazers_count}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <FaCodeBranch />
-                      {repo.forks_count}
-                    </span>
-                  </div>
-                </div>
-                {repo.description && (
-                  <p className="text-sm text-white/60 mt-2">{repo.description}</p>
-                )}
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {repo.language && (
-                    <span className="text-xs px-2 py-1 bg-white/10 rounded-full text-white/80">
-                      {repo.language}
-                    </span>
-                  )}
-                  {repo.topics?.map((topic) => (
-                    <span key={topic} className="text-xs px-2 py-1 bg-blue-500/10 rounded-full text-blue-300">
-                      {topic}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
-
-        {/* README 內容 - 改為 4/6 寬度 */}
-        <div className="lg:col-span-4 prose prose-invert max-w-none max-h-[80vh] overflow-y-auto pr-4">
-          {selectedRepo && (
-            <>
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-2xl font-bold text-white m-0">{selectedRepo.name}</h2>
-                <a
-                  href={selectedRepo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg text-white transition-colors"
-                >
-                  <FaGithub />
-                  View on GitHub
-                </a>
-              </div>
-              <ReactMarkdown
-                remarkPlugins={[remarkGfm]}
-                rehypePlugins={[rehypeRaw, [rehypeHighlight, { detect: true }]]}
-                className="markdown-content"
-              >
-                {readme}
-              </ReactMarkdown>
-            </>
-          )}
-        </div>
+    <>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {repos.map((repo) => (
+          <ProjectCard
+            key={repo.name}
+            repo={repo}
+            onClick={() => handleProjectClick(repo)}
+          />
+        ))}
       </div>
-    </div>
+
+      <ProjectModal
+        repo={selectedRepo}
+        readme={readme}
+        latestCommit={latestCommit}
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
+    </>
   );
 }

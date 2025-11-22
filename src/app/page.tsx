@@ -6,6 +6,8 @@ import GithubProjects from "../components/ui/github-projects";
 import Image from "next/image";
 import { solutions } from "../lib/solutions"; // 確保導入 solutions
 
+import { TechBackground } from "../components/ui/tech-background";
+
 export default function Home() {
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
   
@@ -17,7 +19,7 @@ export default function Home() {
         <div className="flex items-center justify-center w-full h-full bg-neutral-900/50 rounded-xl p-4">
           <div className="relative w-32 h-32">
             <Image
-              src="/myweb/profile.jpg"
+              src={`${basePath}/profile.jpg`}
               alt="Profile"
               fill
               className="rounded-full object-cover border-2 border-white/20"
@@ -106,17 +108,7 @@ export default function Home() {
 
   return (
     <div className="w-full min-h-screen bg-black relative">
-      {/* Background */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/myweb/background.png"
-          alt="Background"
-          fill
-          priority
-          className="object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
+      <TechBackground />
 
       {/* Content */}
       <div className="relative z-10">
@@ -136,9 +128,19 @@ export default function Home() {
         <section className="max-w-7xl mx-auto px-4 py-20">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {items.map((item, i) => (
-              <div key={i} className={`p-6 bg-neutral-800 rounded-xl ${item.className}`}>
-                <div className="text-lg font-bold mb-4">{item.header}</div>
-                <div className="text-sm text-neutral-400">{item.description}</div>
+              <div 
+                key={i} 
+                className={`p-6 rounded-2xl bg-black/40 backdrop-blur-md border border-white/10 hover:border-cyan-500/30 transition-all duration-300 shadow-lg hover:shadow-cyan-500/10 ${item.className}`}
+              >
+                <div className="text-2xl font-bold mb-6 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+                  {item.title}
+                </div>
+                {typeof item.header !== 'string' && (
+                  <div className="mb-4">{item.header}</div>
+                )}
+                <div className="text-neutral-300 whitespace-pre-wrap leading-relaxed">
+                  {item.description}
+                </div>
               </div>
             ))}
           </div>

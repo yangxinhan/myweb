@@ -17,12 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="zh-TW">
+    <html lang="zh-TW" className="dark">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`}>
         <PageTransition>
           {children}
         </PageTransition>

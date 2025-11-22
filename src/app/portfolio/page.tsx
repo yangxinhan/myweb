@@ -1,35 +1,29 @@
 "use client";
 import { Navbar } from "../../components/ui/navbar";
-import GithubProjects from "../../components/ui/github-projects"; // 使用默認導入
+import GithubProjects from "../../components/ui/github-projects";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { TechBackground } from "../../components/ui/tech-background";
 
 export default function PortfolioPage() {
   return (
     <div className="w-full min-h-screen bg-black relative">
-      {/* Background */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/myweb/background.png"
-          alt="Background"
-          fill
-          priority
-          className="object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
+      <TechBackground />
 
       {/* Content */}
       <div className="relative z-10">
         <Navbar />
         
-        <div className="container mx-auto px-4 pt-24">
-          <h1 className="text-3xl font-bold text-white mb-8">作品集</h1>
-          <div className="grid grid-cols-1 lg:grid-cols-1 gap-8">
-            <div className="lg:col-span-1 backdrop-blur-sm">
-              <GithubProjects />
-            </div>
-            
-          </div>
+        <div className="container mx-auto px-4 pt-24 pb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <h1 className="text-4xl font-bold text-white mb-2">作品集</h1>
+            <p className="text-neutral-400 mb-8">我的 GitHub 開源專案與實作</p>
+            <GithubProjects />
+          </motion.div>
         </div>
       </div>
     </div>

@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS='--localstorage-file=/tmp/ls' next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "NODE_OPTIONS='--localstorage-file=/tmp/ls' next start",
     "lint": "next lint",
     "predeploy": "next build",
     "deploy": "gh-pages -d out -t true"

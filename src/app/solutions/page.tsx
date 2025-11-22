@@ -4,23 +4,15 @@ import { Navbar } from "../../components/ui/navbar";
 import { SolutionsGrid } from "../../components/ui/solutions-collection";
 import { solutions } from "../../lib/solutions";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { TechBackground } from "../../components/ui/tech-background";
 
 export default function SolutionsPage() {
   const [filter, setFilter] = useState("all");
 
   return (
     <div className="w-full min-h-screen bg-black relative">
-      {/* Background */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/myweb/background.png"
-          alt="Background"
-          fill
-          priority
-          className="object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
+      <TechBackground />
 
       {/* Content */}
       <div className="relative z-10">
@@ -29,30 +21,30 @@ export default function SolutionsPage() {
           <h1 className="text-3xl font-bold text-white mb-8">演算法題解</h1>
           
           {/* Filter */}
-          <div className="flex gap-2 mb-8">
-            <button
-              onClick={() => setFilter("all")}
-              className={`px-3 py-1 rounded-full text-sm ${
-                filter === "all"
-                  ? "bg-white/20 text-white"
-                  : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
-              } transition-colors`}
-            >
-              全部
-            </button>
-            {["LeetCode", "Codeforces", "ZEROJUDGE"].map((platform) => (
-              <button
-                key={platform}
-                onClick={() => setFilter(platform)}
-                className={`px-3 py-1 rounded-full text-sm ${
-                  filter === platform
-                    ? "bg-white/20 text-white"
-                    : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
-                } transition-colors`}
-              >
-                {platform}
-              </button>
-            ))}
+          <div className="flex flex-wrap gap-2 mb-12">
+            {["all", "LeetCode", "Codeforces", "ZeroJudge"].map((platform) => {
+              const isActive = filter === platform;
+              return (
+                <button
+                  key={platform}
+                  onClick={() => setFilter(platform)}
+                  className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+                    isActive ? "text-white" : "text-white/60 hover:text-white hover:bg-white/5"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="filter-active"
+                      className="absolute inset-0 bg-white/10 rounded-full border border-white/10"
+                      transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                    />
+                  )}
+                  <span className="relative z-10">
+                    {platform === "all" ? "全部" : platform}
+                  </span>
+                </button>
+              );
+            })}
           </div>
 
           <SolutionsGrid solutions={solutions} filter={filter} />

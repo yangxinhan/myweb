@@ -5,7 +5,8 @@ export interface Solution {
   platform: string;
   link: string;
   date: string;
-  tags?: string[];
+  tags: string[];
+  slug: string;
   problem?: string;
   solution?: string;
   code?: string;
@@ -22,6 +23,23 @@ export const solutions: Solution[] = [
     link: "https://leetcode.com/problems/two-sum/",
     date: "2023-01-01",
     tags: ["Array", "Hash Table"],
+    slug: "two-sum",
+    problem: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.",
+    solution: "Use a hash map to store the complement of each number.",
+    code: `class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int, int> m;
+        for (int i = 0; i < nums.size(); i++) {
+            if (m.count(target - nums[i])) {
+                return {m[target - nums[i]], i};
+            }
+            m[nums[i]] = i;
+        }
+        return {};
+    }
+};`,
+    language: "cpp"
   },
   {
     id: 2,
@@ -31,6 +49,7 @@ export const solutions: Solution[] = [
     link: "https://leetcode.com/problems/add-two-numbers/",
     date: "2023-01-02",
     tags: ["Linked List", "Math"],
+    slug: "add-two-numbers",
   },
   {
     id: 3,
@@ -40,5 +59,6 @@ export const solutions: Solution[] = [
     link: "https://leetcode.com/problems/longest-substring-without-repeating-characters/",
     date: "2023-01-03",
     tags: ["String", "Sliding Window"],
+    slug: "longest-substring-without-repeating-characters",
   },
 ];
