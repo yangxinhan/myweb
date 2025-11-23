@@ -9,7 +9,7 @@ import { solutions } from "../lib/solutions"; // 確保導入 solutions
 
 
 export default function Home() {
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
   
   const items = [
     {
@@ -19,7 +19,7 @@ export default function Home() {
         <div className="flex items-center justify-center w-full h-full bg-neutral-900/50 rounded-xl p-4">
           <div className="relative w-32 h-32">
             <Image
-              src={`${basePath}/profile.jpg`}
+              src="/profile.jpg"
               alt="Profile"
               fill
               className="rounded-full object-cover border-2 border-white/20"
@@ -85,7 +85,7 @@ export default function Home() {
         <div className="relative">
           <div className="absolute -top-11 right-0">
             <a
-              href={`${basePath}/solutions`}
+              href="/solutions"
               className="text-sm text-neutral-400 hover:text-white transition-colors flex items-center gap-1"
             >
               More

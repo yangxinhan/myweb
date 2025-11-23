@@ -9,7 +9,7 @@ interface SolutionCardProps {
 }
 
 export function SolutionCard({ solution, index, onClick }: SolutionCardProps & { onClick?: () => void }) {
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
 
   const getDifficultyColor = (diff: string) => {
     switch (diff.toLowerCase()) {
@@ -68,7 +68,7 @@ export function SolutionCard({ solution, index, onClick }: SolutionCardProps & {
   }
 
   return (
-    <Link href={`${basePath}/solutions/${solution.slug}`}>
+    <Link href={`/solutions/${solution.slug}`}>
       <CardContent />
     </Link>
   );

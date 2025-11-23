@@ -19,7 +19,7 @@ export function Timeline({ items }: TimelineProps) {
   // 按年份分組
   const groupedItems = useMemo(() => {
     const groups: { [key: string]: TimelineItem[] } = {};
-    const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
 
     items.forEach(item => {
       const date = new Date(item.date);
@@ -27,10 +27,10 @@ export function Timeline({ items }: TimelineProps) {
       if (!groups[year]) {
         groups[year] = [];
       }
-      // 確保連結包含 basePath
+
       groups[year].push({
         ...item,
-        link: item.link.startsWith('http') ? item.link : `${basePath}${item.link}`
+        link: item.link
       });
     });
 

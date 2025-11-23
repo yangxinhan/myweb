@@ -18,19 +18,19 @@ interface GitHubRepo {
 
 // 簡化 getSolutions 函數
 function getSolutions(): TimelineItem[] {
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
   return solutions.map(solution => ({
     type: 'solution' as const,
     title: solution.title,
     date: solution.date || "2024-02-18",
-    link: `${basePath}/solutions#${solution.id}`,
+    link: `/solutions#${solution.id}`,
     description: `${solution.difficulty}, ${solution.platform}`
   }));
 }
 
 export async function getAllTimelineItems(): Promise<TimelineItem[]> {
   const items: TimelineItem[] = [];
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
 
   // 獲取部落格文章
   const blogPosts = await getAllBlogPosts();
@@ -38,7 +38,7 @@ export async function getAllTimelineItems(): Promise<TimelineItem[]> {
     type: 'blog' as const,
     title: post.title,
     date: post.date,
-    link: `${basePath}/blog/${post.slug}`,
+    link: `/blog/${post.slug}`,
     description: post.description
   })));
 
@@ -50,7 +50,7 @@ export async function getAllTimelineItems(): Promise<TimelineItem[]> {
       type: 'project' as const,
       title: repo.name,
       date: repo.created_at,
-      link: `${basePath}/portfolio?repo=${repo.name}`,
+      link: `/portfolio?repo=${repo.name}`,
       description: repo.description || undefined
     })));
   } catch (error) {
@@ -59,10 +59,7 @@ export async function getAllTimelineItems(): Promise<TimelineItem[]> {
 
   // 獲取題解
   const solutionItems = getSolutions();
-  items.push(...solutionItems.map(solution => ({
-    ...solution,
-    link: `${basePath}/solutions#${solution.id}`
-  })));
+  items.push(...solutionItems);
 
   // 依照日期排序
   return items.sort((a, b) => 

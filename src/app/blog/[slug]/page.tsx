@@ -15,7 +15,7 @@ export default async function Page({
 }) {
   const { slug } = await params;
   const post = await getBlogPost(slug);
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
 
   return (
     <div className="w-full min-h-screen relative">

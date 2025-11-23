@@ -12,7 +12,7 @@ import {
 
 export function Navbar() {
   const pathname = usePathname();
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
 
   const links = [
     { href: '/', label: '首頁', icon: HomeIcon },
@@ -26,17 +26,17 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 bg-black/20 backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link href={`${basePath}/`} className="text-white font-bold text-xl tracking-tight hover:text-white/80 transition-colors">
+          <Link href="/" className="text-white font-bold text-xl tracking-tight hover:text-white/80 transition-colors">
             羊羊的程式日記
           </Link>
           <div className="flex gap-1">
             {links.map((link) => {
-              const isActive = pathname === `${basePath}${link.href}` || (link.href !== '/' && pathname?.startsWith(`${basePath}${link.href}`));
+              const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
               
               return (
                 <Link
                   key={link.href}
-                  href={`${basePath}${link.href}`}
+                  href={link.href}
                   className={`relative px-4 py-2 rounded-full text-sm font-medium transition-colors ${
                     isActive ? 'text-white' : 'text-white/60 hover:text-white'
                   }`}

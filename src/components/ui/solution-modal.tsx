@@ -14,10 +14,9 @@ interface SolutionModalProps {
   solution: Solution;
   isOpen: boolean;
   onClose: () => void;
-  basePath?: string;
 }
 
-export function SolutionModal({ solution, isOpen, onClose, basePath = '' }: SolutionModalProps) {
+export function SolutionModal({ solution, isOpen, onClose }: SolutionModalProps) {
   useEffect(() => {
     if (isOpen) {
       hljs.highlightAll();
@@ -115,7 +114,7 @@ export function SolutionModal({ solution, isOpen, onClose, basePath = '' }: Solu
                 <div className="flex justify-between items-center pt-4 border-t border-white/10">
                   <span className="text-sm text-neutral-400">{solution.date}</span>
                   <a
-                    href={solution.url}
+                    href={solution.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-neutral-400 hover:text-white transition-colors"

@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default async function BlogPage() {
   const posts = await getAllBlogPosts();
-  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+
 
   return (
     <div className="w-full min-h-screen relative">
@@ -20,7 +20,7 @@ export default async function BlogPage() {
             {posts.map((post) => (
               <Link
                 key={post.slug}
-                href={`${basePath}/blog/${post.slug}`}
+                href={`/blog/${post.slug}`}
                 className="block bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-colors"
               >
                 <h2 className="text-xl font-bold text-white mb-2">{post.title}</h2>
