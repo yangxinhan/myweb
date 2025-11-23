@@ -34,3 +34,19 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## 🚀 部署
+
+### 自動化部署 (樹莓派)
+
+專案包含一個自動化部署腳本，可以自動拉取最新程式碼並重新建置 Docker 容器。
+
+1. 賦予腳本執行權限（如果尚未執行）：
+   ```bash
+   chmod +x deploy.sh
+   ```
+
+2. 執行部署腳本：
+   ```bash
+   ./deploy.sh
+   ```
