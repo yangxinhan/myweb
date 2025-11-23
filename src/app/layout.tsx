@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { PageTransition } from "../components/ui/page-transition";
 import 'highlight.js/styles/atom-one-dark.css'; // 新增這行
+import { TechBackground } from "../components/ui/tech-background";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={`${inter.className} antialiased bg-background text-foreground min-h-screen`}>
+        <TechBackground />
         <PageTransition>
           {children}
         </PageTransition>

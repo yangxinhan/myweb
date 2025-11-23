@@ -3,12 +3,12 @@ import { Navbar } from "../../components/ui/navbar";
 import GithubProjects from "../../components/ui/github-projects";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { TechBackground } from "../../components/ui/tech-background";
+
 
 export default function PortfolioPage() {
   return (
-    <div className="w-full min-h-screen bg-black relative">
-      <TechBackground />
+    <div className="w-full min-h-screen relative">
+
 
       {/* Content */}
       <div className="relative z-10">

@@ -6,7 +6,7 @@ import GithubProjects from "../components/ui/github-projects";
 import Image from "next/image";
 import { solutions } from "../lib/solutions"; // 確保導入 solutions
 
-import { TechBackground } from "../components/ui/tech-background";
+
 
 export default function Home() {
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
@@ -107,8 +107,8 @@ export default function Home() {
   ];
 
   return (
-    <div className="w-full min-h-screen bg-black relative">
-      <TechBackground />
+    <div className="w-full min-h-screen relative">
+
 
       {/* Content */}
       <div className="relative z-10">

@@ -8,18 +8,8 @@ export default async function BlogPage() {
   const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
 
   return (
-    <div className="w-full min-h-screen bg-black relative">
-      {/* Background */}
-      <div className="fixed inset-0 z-0">
-        <Image
-          src="/myweb/background.png"
-          alt="Background"
-          fill
-          priority
-          className="object-cover opacity-60"
-        />
-        <div className="absolute inset-0 bg-black/70" />
-      </div>
+    <div className="w-full min-h-screen relative">
+
 
       {/* Content */}
       <div className="relative z-10">

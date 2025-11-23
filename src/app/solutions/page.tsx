@@ -5,14 +5,14 @@ import { SolutionsGrid } from "../../components/ui/solutions-collection";
 import { solutions } from "../../lib/solutions";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { TechBackground } from "../../components/ui/tech-background";
+
 
 export default function SolutionsPage() {
   const [filter, setFilter] = useState("all");
 
   return (
-    <div className="w-full min-h-screen bg-black relative">
-      <TechBackground />
+    <div className="w-full min-h-screen relative">
+
 
       {/* Content */}
       <div className="relative z-10">
