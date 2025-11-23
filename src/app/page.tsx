@@ -1,7 +1,7 @@
 "use client";
 import { Navbar } from "../components/ui/navbar";
 import { SolutionsGrid } from "../components/ui/solutions-collection";
-import { FaGithub, FaInstagram, FaFacebook, FaDiscord, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaInstagram, FaFacebook, FaDiscord, FaLinkedin, FaMailchimp } from "react-icons/fa";
 import GithubProjects from "../components/ui/github-projects";
 import Image from "next/image";
 import { solutions } from "../lib/solutions"; // 確保導入 solutions
@@ -31,14 +31,14 @@ export default function Home() {
       ),
     },
     {
-      title: "聯絡資訊",
-      description: "📍 台灣，台南\n📧 yangxinhan061@gmail.com\n🎓 大灣高中高三牲",
-      header: "Contact",
+      title: "經歷",
+      description: "🎓靜宜大學資訊管理學系一年級\n🎥SITCON2025 製播組 組員\n🎥COSCUP2025 製播組 組員\n🎥SITCON2026 製播組 組員",
+      header: "Experience",
       className: "md:col-span-2",
     },
     {
       title: "關於我",
-      description: "熱愛程式開發，專注於前端技術與使用者體驗設計。持續學習新技術，追求卓越的開發品質。",
+      description: "修改中...",
       header: "About",
       className: "md:col-span-2",
     },
@@ -49,7 +49,7 @@ export default function Home() {
           <a href="https://github.com/yangxinhan" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
             <FaGithub />
           </a>
-          <a href="https://instagram.com/yxh_0404" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
+          <a href="https://instagram.com/yan.g404" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
             <FaInstagram/>
           </a>
           <a href="https://www.facebook.com/share/164AWci5f3/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
@@ -61,6 +61,9 @@ export default function Home() {
           <a href="https://linkedin.com/in/昕翰-楊-93678b351" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
             <FaLinkedin />
           </a>
+          <a href="mailto:xinhanyang061@gmail.com" target="_blank" rel="noopener noreferrer" className="text-white/70 hover:text-white transition-colors">
+            <FaMailchimp />
+          </a>
         </div>
       ),
       header: "Social",
@@ -70,7 +73,13 @@ export default function Home() {
       title: "Languages and Tools",
       description: (
         <div className="flex flex-wrap gap-2">
-          {["HTML","CSS", "JavaScript", "TypeScript", "C", "C#", "C++", "Python", "Swift", "Recat", "Markdown", "Arduino", "Bots", "Discordjs", "Node.js", "npm" , "Opencv", "Pytorch", "Unity", "Unreal", "Anaconda", "Azure", "Blender", "Docker", "Figma", "Firebase", "Git", "Github", "Gitlab", "MySQL", "Notion","PhotoShop","Premiere","Pycharm", "VisualStudio", "VScode"  ,"Apple" ,"windows" ,"Linux", "Kali", "Ros", "Raspberry Pi"].map((skill) => (
+          {["HTML","CSS", "JavaScript", "TypeScript", "C", "C#", "C++",
+           "Python", "Swift", "Java", "React", "Markdown", "Arduino", "Bots",
+           "Ros","Discordjs", "Node.js", "npm" , "Opencv", "Pytorch", "Unity",
+           "Unreal", "Anaconda", "Azure", "Blender", "Docker", "Figma",
+           "Firebase", "Git", "Github", "Gitlab", "MySQL", "Notion",
+           "PhotoShop", "Premiere", "Pycharm", "VisualStudio", "VScode", 
+           "Apple", "windows", "Linux", "Kali", "Raspberry Pi"].map((skill) => (
             <span key={skill} className="bg-white/10 px-3 py-1 rounded-full text-sm text-white">
               {skill}
             </span>
