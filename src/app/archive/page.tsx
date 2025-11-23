@@ -6,6 +6,7 @@ import { getAllTimelineItems } from "../../lib/timeline-utils";
 
 export default async function ArchivePage() {
   const timelineItems = await getAllTimelineItems();
+  const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
 
 
   return (
@@ -13,7 +14,7 @@ export default async function ArchivePage() {
       {/* Background */}
       <div className="fixed inset-0 z-0">
         <Image
-          src="/background.png"
+          src={`${basePath}/background.png`}
           alt="Background"
           fill
           priority

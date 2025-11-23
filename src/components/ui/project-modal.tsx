@@ -1,5 +1,6 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
@@ -39,7 +40,10 @@ interface ProjectModalProps {
 }
 
 export function ProjectModal({ repo, readme, latestCommit, isOpen, onClose }: ProjectModalProps) {
+  const [mounted, setMounted] = useState(false);
+
   useEffect(() => {
+    setMounted(true);
     if (isOpen) {
       document.body.style.overflow = 'hidden';
       return () => {
@@ -48,9 +52,9 @@ export function ProjectModal({ repo, readme, latestCommit, isOpen, onClose }: Pr
     }
   }, [isOpen]);
 
-  if (!repo || !isOpen) return null;
+  if (!repo || !isOpen || !mounted) return null;
 
-  return (
+  return createPortal(
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center ${
         isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
@@ -138,6 +142,7 @@ export function ProjectModal({ repo, readme, latestCommit, isOpen, onClose }: Pr
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

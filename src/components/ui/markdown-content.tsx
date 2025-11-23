@@ -27,10 +27,12 @@ export default function MarkdownContent({ content }: MarkdownContentProps) {
         components={{
           img: ({ src, alt }) => {
             if (!src || typeof src !== 'string') return null;
+            const basePath = process.env.NODE_ENV === 'production' ? '/myweb' : '';
+            const finalSrc = src.startsWith('/') ? `${basePath}${src}` : src;
             return (
               <div className="relative w-full h-[400px] my-4">
                 <Image
-                  src={src}
+                  src={finalSrc}
                   alt={alt || ''}
                   fill
                   className="object-contain"
