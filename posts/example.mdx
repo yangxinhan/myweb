@@ -1,19 +1,142 @@
 ---
-title: '第一篇文章'
-date: '2025-02-18'
-description: '這是我的第一篇部落格文章'
+title: 'Python 筆記'
+date: '2025-10-16'
+description: 'Python 筆記'
 ---
 
-# 標題
+# Python
 
-這是文章內容...
+## 基礎語法
 
-## 子標題
+### 變數與資料型別
 
-- 列表項目 1
-- 列表項目 2
+``` python
+# 整數、浮點數、字串、布林值
+x = 10          # int
+y = 3.14        # float
+name = "Alice"  # str
+is_ok = True    # bool 有True & False == 1 & 0
 
-```javascript
-console.log('Hello, World!');
+print(type(x))  # <class 'int'>
 ```
-test
+
+:::info
+- 不需要宣告型別，Python 自動判斷。 
+- 變數名稱區分大小寫。
+- 可使用 `type()` 查看資料型別。
+:::
+
+------------------------------------------------------------------------
+
+### 基本輸出與輸入
+
+``` python
+name = input("請輸入名字：")
+print("你好,", name)
+```
+
+:::info
+- `input()` 回傳字串。 
+- 若要轉數字，需用 `int()` 或`float()` 轉換。
+:::
+
+------------------------------------------------------------------------
+
+### 運算子
+
+``` python
+a, b = 5, 2
+print(a + b)   # 加法 → 7
+print(a / b)   # 除法 → 2.5
+print(a // b)  # 整除 → 2
+print(a ** b)  # 次方 → 25
+```
+
+:::info
+- `/` 會自動變成浮點數。 
+- `//` 取整數除法。
+:::
+
+------------------------------------------------------------------------
+
+### 條件判斷 (if / elif / else)
+
+``` python
+score = 85
+
+if score >= 90:
+    print("A")
+elif score >= 80:
+    print("B")
+else:
+    print("C")
+```
+
+:::info
+- 縮排代表程式區塊（通常4個空白）。 或按一下tab（開發時有機率出事
+- 沒有 `{}`，以冒號`:` + 縮排代替。
+:::
+
+------------------------------------------------------------------------
+
+### 迴圈 (for / while)
+
+``` python
+# for loop
+for i in range(3):
+    print("第", i, "次")
+    # 輸出第0, 1, 2次
+
+# while loop
+n = 0
+while n < 3:
+    print("n =", n)
+    n += 1
+    #輸出n =0, 1, 2
+```
+
+:::info
+- `range(n)` 產生 0～n-1。 
+- `break` 跳出迴圈；`continue`跳過當次。
+:::
+
+------------------------------------------------------------------------
+
+## 以下這次應該不會考到
+
+### 函式 (Function)
+
+``` python
+def greet(name):
+    return "Hello, " + name
+
+print(greet("Alice"))
+```
+
+:::info
+- 使用 `def` 宣告。 
+- 可有參數與回傳值。
+- 可用 `return`回傳結果。
+:::
+
+------------------------------------------------------------------------
+
+### 資料結構：list, tuple, dict, set
+
+``` python
+fruits = ["apple", "banana", "cherry"]
+ages = (18, 20, 25)
+scores = {"Tom": 90, "Amy": 85}
+nums = {1, 2, 3, 3}
+
+print(fruits[0])      # apple
+print(scores["Amy"])  # 85
+print(nums)           # {1, 2, 3}
+```
+
+:::info
+- list 可變、tuple 不可變。 
+- dict 用「鍵:值」儲存資料。
+- set 無重複元素。
+:::
+

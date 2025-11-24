@@ -38,7 +38,7 @@ export default function Home() {
     },
     {
       title: "關於我",
-      description: "修改中...",
+      description: "一個學生，一個開發者，四處拼湊的技能",
       header: "About",
       className: "md:col-span-2",
     },
